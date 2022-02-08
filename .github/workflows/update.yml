@@ -1,0 +1,28 @@
+name: Update
+
+on:
+  schedule:
+  - cron: 0 15 * * *
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+    - name: Configure git
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+        git remote set-url origin https://eggplants:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        git checkout master
+    - name: Run dl.sh
+      run: |
+        ./dl.sh
+    - name: Commit
+      run: |
+        git add .
+        git commit -m "update: $(date +%y%m%d)"
+        git push origin master
