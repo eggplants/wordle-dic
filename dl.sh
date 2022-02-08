@@ -26,4 +26,7 @@ if {
 }; then
   echo "${l_old} -> ${l_new}"
   mv "$f_tmp" "$f"
+else
+  echo "(no changed)"
+  exit 1
 fi
