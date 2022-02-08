@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
 
 f='wordle_valid_word_dictionary.txt'
 s='https://www.powerlanguage.co.uk/wordle/main.e65ce0a5.js'
@@ -24,5 +24,6 @@ if {
   [ "$l_new" -gt 1000 ] &&
   [ "$l_old" -ne "$l_new" ]
 }; then
+  echo "${l_old} -> ${l_new}"
   mv "$f_tmp" "$f"
 fi
