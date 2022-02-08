@@ -10,15 +10,19 @@ if ! command -v curl &> /dev/null; then
   exit 1
 fi
 
+: >> "$f"
+
 f_tmp="$(mktemp)"
 curl -s "$s" |
   grep -o 'var La.*],Ia=' | grep -oE '\"[a-z]{5}\"' |
   xargs -n1 | sort | uniq > "$f_tmp"
 
-l="$(wc -l < "$f_tmp")"
+l_old="$(wc -l < "$f")"
+l_new="$(wc -l < "$f_tmp")"
+
 if {
-  ! [ -f "$f" ] ||
-  [ "$(wc -l < "$f")" -ne "$l" ]
+  [ "$l_new" -gt 1000 ] &&
+  [ "$l_old" -ne "$l_new" ]
 }; then
   mv "$f_tmp" "$f"
 fi
