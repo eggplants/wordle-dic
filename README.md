@@ -1,4 +1,6 @@
-# `wordle_valid_word_dictionary.txt`
+# Dictionary of valid words in Wordle
 
-- <https://raw.githubusercontent.com/eggplants/wordle-dic/master/wordle_valid_word_dictionary.txt>
-- Automatically updated daily
+- [wordle_valid_word_dictionary.txt](https://raw.githubusercontent.com/eggplants/wordle-dic/master/wordle_valid_word_dictionary.txt)
+  - <https://raw.githubusercontent.com/eggplants/wordle-dic/master/wordle_valid_word_dictionary.txt>
+  - Automatically updated daily
+
