@@ -17,6 +17,7 @@ curl -s "$s" |
   grep -o 'var La.*],Ia=' | grep -oE '\"[a-z]{5}\"' |
   xargs -n1 | sort | uniq > "$f_tmp"
 
+l_old="$(wc -l < "$f")"
 l_new="$(wc -l < "$f_tmp")"
 
 if {
