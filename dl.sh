@@ -17,16 +17,15 @@ curl -s "$s" |
   grep -o 'var La.*],Ia=' | grep -oE '\"[a-z]{5}\"' |
   xargs -n1 | sort | uniq > "$f_tmp"
 
-l_old="$(wc -l < "$f")"
 l_new="$(wc -l < "$f_tmp")"
 
 if {
   [ "$l_new" -gt 10000 ] &&
   [ \
     "$(
-      sha256sum <<< "$l_old" | cut -f1 -d ' '
+      sha256sum "$f" | cut -f1 -d ' '
     )" != "$(
-      sha256sum <<< "$l_new" | cut -f1 -d ' '
+      sha256sum "$f_tmp" | cut -f1 -d ' '
     )" \
   ]
 }; then
