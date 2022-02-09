@@ -18,19 +18,15 @@ curl -s "$s" |
   xargs -n1 | sort | uniq > "$f_tmp"
 
 l_old="$(wc -l < "$f")"
+s_old="$(sha256sum "$f" | cut -f1 -d ' ')"
 l_new="$(wc -l < "$f_tmp")"
+s_new="$(sha256sum "$f_tmp" | cut -f1 -d ' ')"
 
 if {
   [ "$l_new" -gt 10000 ] &&
-  [ \
-    "$(
-      sha256sum "$f" | cut -f1 -d ' '
-    )" != "$(
-      sha256sum "$f_tmp" | cut -f1 -d ' '
-    )" \
-  ]
+  [ "$s_old" != "$s_new" ]
 }; then
-  echo "${l_old} -> ${l_new}"
+  echo "${l_old} (${s_old}) -> ${l_new} (${s_new})"
   mv "$f_tmp" "$f"
 else
   echo "(no changed)"
