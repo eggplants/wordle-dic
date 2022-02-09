@@ -21,8 +21,14 @@ l_old="$(wc -l < "$f")"
 l_new="$(wc -l < "$f_tmp")"
 
 if {
-  [ "$l_new" -gt 1000 ] &&
-  [ "$l_old" -ne "$l_new" ]
+  [ "$l_new" -gt 10000 ] &&
+  [ \
+    "$(
+      sha256sum <<< "$l_old" | cut -f1 -d ' '
+    )" != "$(
+      sha256sum <<< "$l_new" | cut -f1 -d ' '
+    )" \
+  ]
 }; then
   echo "${l_old} -> ${l_new}"
   mv "$f_tmp" "$f"
