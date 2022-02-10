@@ -30,5 +30,4 @@ if {
   mv "$f_tmp" "$f"
 else
   echo "(no changed)"
-  exit 1
 fi
