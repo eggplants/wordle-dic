@@ -23,6 +23,10 @@ jobs:
         ./dl.sh
     - name: Commit
       run: |
-        git add .
-        git commit -m "update: $(date +%y%m%d)"
-        git push origin master
+        if git diff-index --quiet HEAD --; then
+          :
+        else
+          git add .
+          git commit -m "update: $(date +%y%m%d)"
+          git push origin master
+        fi
