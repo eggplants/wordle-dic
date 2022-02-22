@@ -3,7 +3,7 @@
 set -euo pipefail
 
 f='wordle_valid_word_dictionary.txt'
-s='https://www.powerlanguage.co.uk/wordle/main.e65ce0a5.js'
+s='https://www.nytimes.com/games/wordle/main.4d41d2be.js'
 
 if ! command -v curl &> /dev/null; then
   echo 'err: install curl' >&2
