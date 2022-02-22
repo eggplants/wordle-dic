@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -euxo pipefail
 
 f='wordle_valid_word_dictionary.txt'
 s='https://www.nytimes.com/games/wordle/main.4d41d2be.js'
@@ -14,7 +14,7 @@ fi
 
 f_tmp="$(mktemp)"
 curl -s "$s" |
-  grep -o 'var La.*],Ia=' | grep -oE '\"[a-z]{5}\"' |
+  grep -o 'var ..=\[".*"\],..="present' | grep -oE '\"[a-z]{5}\"' |
   xargs -n1 | sort | uniq > "$f_tmp"
 
 l_old="$(wc -l < "$f")"
